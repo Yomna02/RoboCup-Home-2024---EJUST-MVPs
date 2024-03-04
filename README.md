@@ -58,20 +58,20 @@ To install dependencies for the project, follow these steps:
 
 ## Package Installation
 ### Installing ROS1 pkg
-1. Clone the Repository:
+1. Clone the Repository: <br>
     Use `git clone` to clone the repository into the `src` directory of your ROS1 workspace.
-2. Build the Workspace:
+2. Build the Workspace: <br>
     Navigate to the root directory of your workspace and build the packages using `catkin_make`.
-3. Source the Workspace:
+3. Source the Workspace: <br>
     Source the setup script to add the new package to your ROS environment.
    
 ### Installing ROS2 pkg
-1. Clone the Repository:
+1. Clone the Repository: <br>
     Use `git clone` to clone the repository into the `src` directory of your ROS2 workspace.
-2. Build the Workspace:
+2. Build the Workspace: <br>
     Navigate to the root directory of your workspace and build the packages using `colcon build`.
-3. Source the Workspace:
-    Source the setup script to add the new package to your ROS2 environment.
+3. Source the Workspace: <br>
+    Source the setup script to add the new package to your ROS2 environment. <br>
 [Add ya Beedo the git clone links and revise if any further packages are missing]
 
 ---------------------------
@@ -80,20 +80,20 @@ To install dependencies for the project, follow these steps:
 1. Connect all hardware components and sensors to the on-board laptop.
 2. Ensure other laptops are connected through the hotspot.
 3. Launch ROS2 nodes for sensor data acquisition, perception, navigation, and interaction scripts.
-4. Monitor robot behavior and performance using RViz for visualization.
+4. Monitor robot behavior and performance using RViz for visualization. <br>
 [Add ba2a ya Beedo the main launch/run commands to start the robot]
 
 ---------------------------
 
 ## Credits
-This project was developed by the EJUST MVPs team from Egypt-Japan University of Science and Technology for the RoboCup@Home education competition in 2024. Team members include:
+This project was developed by the EJUST MVPs team from Egypt-Japan University of Science and Technology for the RoboCup@Home education competition in 2024. We acknowledge the contributions of team members and mentors who helped in the design, implementation, and testing phases of the project. Team members include:
 - Abdallah Amr (abdallah.amr@ejust.edu.eg)
 - Mostafa Osama (mostafa.eshra@ejust.edu.eg)
 - Tarek Shohdy (tarek.shohdy@ejust.edu.eg)
 - Yomna Mohamed (yomna.mokhtar@ejust.edu.eg)
 - Ahmad Mongy (ahmad.aboelnaga@ejust.edu.eg)
 
-We acknowledge the contributions of team members and mentors who helped in the design, implementation, and testing phases of the project. We would also like to acknowledge the following libraries and tools that were used in the development of this project:
+We would also like to acknowledge the following libraries and tools that were used in the development of this project:
 
 - [ROS2 Foxy Fitzroy](https://docs.ros.org/en/foxy/index.html) - Robot Operating System 2 (ROS2) provides the middleware framework for developing robotic applications.
 - [ROS1 Noetic](https://wiki.ros.org/noetic/Installation) - Robot Operating System 1 (ROS1) provides the middleware framework for developing robotic applications.
