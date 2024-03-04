@@ -34,7 +34,7 @@ Welcome to the repository for the RoboCup@Home Education Competition Robot devel
   
 ### Assembly:
 1. Attach the sensors and hardware to the Pioneer3DX robot base.
-2. Connect speakers, microphone, RPLidar sensor, ZED stereo camera, and robot base serial cable to the USB hubs to the robot base as needed.
+2. Connect speakers, microphone, RPLidar sensor, ZED stereo camera, and robot base serial cable to the USB hubs.
 3. Ensure laptops are connected to the hotspot for remote computing.
 
 ---------------------------
