@@ -17,8 +17,8 @@ Welcome to the repository for the RoboCup@Home Education Competition Robot devel
 ---------------------------
 
 ## Components and Assembly
-<img src="https://github.com/Yomna02/RoboCup-Home-2024---EJUST-MVPs/blob/main/pioneer.jpg?raw=true" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
 ### Components:
+<img src="https://github.com/Yomna02/RoboCup-Home-2024---EJUST-MVPs/blob/main/pioneer.jpg?raw=true" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
 - Robot Base: Pioneer3DX
 - Sensors:
   - RPLidar Sensor
