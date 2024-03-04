@@ -12,7 +12,7 @@
 - [Future Work](#future-work)
 
 ## Overview
-<img src="" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
+<img src="https://github.com/Yomna02/RoboCup-Home-2024---EJUST-MVPs/blob/main/pioneer.jpg?raw=true" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
 Welcome to the repository for the RoboCup@Home Education Competition Robot developed by the EJUST MVPs team for the year 2024. This service robot is designed to compete in the RoboCup@Home education competition, showcasing capabilities in speech recognition, navigation, mapping, and interaction. The robot integrates various sensors, hardware components, and software libraries under the umbrella of ROS2 Foxy.
 
 ---------------------------
