@@ -18,7 +18,6 @@ Welcome to the repository for the RoboCup@Home Education Competition Robot devel
 
 ## Components and Assembly
 ### Components:
-<img src="https://github.com/Yomna02/RoboCup-Home-2024---EJUST-MVPs/blob/main/pioneer.jpg?raw=true" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
 - Robot Base: Pioneer3DX
 - Sensors:
   - RPLidar Sensor
@@ -31,6 +30,7 @@ Welcome to the repository for the RoboCup@Home Education Competition Robot devel
   - Three laptops connected through a hotspot
   
 ### Assembly:
+<img src="https://github.com/Yomna02/RoboCup-Home-2024---EJUST-MVPs/blob/main/pioneer.jpg?raw=true" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
 1. Attach the RPLidar sensor and ZED stereo camera to the Pioneer3DX robot base.
 2. Connect speakers, microphone, and USB hubs to the robot base as needed.
 3. Ensure laptops are connected to the hotspot for remote computing.
