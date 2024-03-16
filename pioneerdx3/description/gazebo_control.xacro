@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    
+    <gazebo>
+            <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+                <always_on>true</always_on>
+                <update_rate>100</update_rate>
+
+                <!-- Wheel Information -->
+                <right_joint>right_wheel_joint</right_joint>
+                <left_joint>left_wheel_joint</left_joint>
+                <wheel_separation>0.158</wheel_separation>
+                <wheel_diameter>0.12</wheel_diameter>
+
+                <!-- Limits -->
+                <max_wheel_torque>200</max_wheel_torque>
+                <max_wheel_acceleration>10.0</max_wheel_acceleration>
+
+                <!-- interface:position name="position_iface_0"/ -->
+                <command_topic>cmd_vel</command_topic>
+                <odometry_topic>odom</odometry_topic>
+                <odometry_frame>odom</odometry_frame>
+                <robot_base_frame>base_link</robot_base_frame>
+
+                <publish_odom>true</publish_odom>
+                <publish_odom_tf>true</publish_odom_tf>
+                <publish_wheel_tf>true</publish_wheel_tf>
+
+            </plugin>
+    </gazebo>
+
+
+<!-- <xacro:macro name="p3dx_gazebo_ext">
+
+	<gazebo>
+	  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+	    <updateRate>100.0</updateRate>
+	    <robotNamespace>/</robotNamespace>
+	    <leftFrontJoint>base_swivel_joint</leftFrontJoint>
+	    <rightFrontJoint>base_swivel_joint</rightFrontJoint>
+	    <leftRearJoint>swivel_hubcap_joint</leftRearJoint>
+	    <rightRearJoint>swivel_hubcap_joint</rightRearJoint>
+	    <wheelSeparation>0.3</wheelSeparation>
+	    <wheelDiameter>0.1</wheelDiameter>
+	    <robotBaseFrame>base_link</robotBaseFrame>
+	    <torque>200</torque>
+	    <commandTopic>cmd_vel</commandTopic>
+	    <odometryTopic>odom</odometryTopic>
+	    <odometryFrame>odom</odometryFrame>
+	  </plugin>
+	</gazebo>
+
+	</xacro:macro> -->
+
+</robot>

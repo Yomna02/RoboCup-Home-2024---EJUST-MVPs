@@ -1,0 +1,8 @@
+#Goal
+string speech
+---
+#Result
+bool finished
+---
+#Feedback
+int32 state

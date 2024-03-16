@@ -1,0 +1,8 @@
+#Goal
+bool capture
+---
+#Result
+string[] values
+---
+#Feedback
+int32 state

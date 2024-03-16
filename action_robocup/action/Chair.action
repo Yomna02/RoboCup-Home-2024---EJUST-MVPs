@@ -1,0 +1,8 @@
+#Goal
+bool choose
+---
+#Result
+string selected
+---
+#Feedback
+int32 state
