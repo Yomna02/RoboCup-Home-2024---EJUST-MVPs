@@ -1,6 +1,20 @@
 # RoboCup-Home-2024---EJUST-MVPs
 
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Components and Assembly](#components-and-assembly)
+  - [Components](#components)
+  - [Assembly](#assembly)
+- [Dependencies Installation](#dependencies-installation)
+- [Package Installation](#package-installation)
+  - [Installing ROS1 pkg](#installing-ros1-pkg)
+  - [Installing ROS2 pkg](installing-ros2-pkg)
+- [Usage](#usage)
+- [Credits](#credits)
+- [Future Work](#future-work)
+
 
 ## Overview
 <img src="https://github.com/Yomna02/RoboCup-Home-2024---EJUST-MVPs/blob/main/pioneer.jpg?raw=true" alt="Our Robot" width="200" align="right" caption="Our Robot"/>
