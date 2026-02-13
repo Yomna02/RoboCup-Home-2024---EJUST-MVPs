@@ -98,19 +98,14 @@ def generate_launch_description():
     face_recog = Node(
         package="vision",
         executable="recog_face")
+    
     # Launch them all!
     return LaunchDescription([
         port_arg,
         rsp,
         lidar,
         filter,
-        # zed,
         tf,
         tts,
-        whisper,
-        battery,
-        person,
-        chair,
-        face_detect,
-        face_recog
+        whisper
         ])

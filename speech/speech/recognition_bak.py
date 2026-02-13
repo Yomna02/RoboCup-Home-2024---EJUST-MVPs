@@ -1,52 +1,90 @@
 import rclpy
+import time
+import random
 import whisper
 import sounddevice as sd
-
-from scipy.io.wavfile import write
 from rclpy.node import Node
-from std_msgs.msg import Int32
+from rclpy.action import ActionServer
+from action_robocup.action import Recog
+from scipy.io.wavfile import write
 
-class Speech(Node):
+LISTENING = 0
+SPEAKING = 1
+
+class FibonacciActionServer(Node):
 
     def __init__(self):
-        super().__init__('speech_whisper')
-        self.subscription = self.create_subscription(
-            Int32,
-            '/mvp/state',
-            self.listener_callback,
-            10)
-        self.subscription  # prevent unused variable warning
+        super().__init__('whisper')
+        self._action_server = ActionServer(
+            self,
+            Recog,
+            'whisper',
+            self.execute_callback)
         self.freq = 44100
-        self.duration = 2
+        self.duration = 3
+        
 
+    def execute_callback(self, goal_handle):
+        self.get_logger().info('Listining...')
 
-    def listener_callback(self, msg):
-        #self.get_logger().info('I heard: "%s"' % msg.data)
-        if msg.data == 1:
-            self.get_logger().info('Talk')
-            self.recording = sd.rec(int(self.duration * self.freq), samplerate=self.freq, channels=2)
+        listen = goal_handle.request.listen
+
+        feedback_msg = Recog.Feedback()
+
+        if listen:
+            feedback_msg.state = LISTENING
             
-            sd.wait()
-            write("/home/beedo/colcon_ws/src/robocup/speech/recording0.wav", self.freq, self.recording)
+            self.get_logger().info(f'Feedback: {feedback_msg.state}')
+            goal_handle.publish_feedback(feedback_msg)
 
-            model = whisper.load_model("small.en")
-            self.result = model.transcribe("/home/beedo/colcon_ws/src/robocup/speech/recording0.wav", fp16=False)
-            self.get_logger().info(self.result["text"])
+            
+            talk = self.listener()
+        
+            feedback_msg.state = SPEAKING
+            self.get_logger().info(f'Feedback: {feedback_msg.state}')
+            goal_handle.publish_feedback(feedback_msg)
+        
+            goal_handle.succeed()
 
+            result = Recog.Result()
+
+            result.speech = talk
+            
+            return result
+        
+        goal_handle.abort()
+
+        feedback_msg.state = SPEAKING
+        self.get_logger().info(f'Feedback: {feedback_msg.state}')
+        goal_handle.publish_feedback(feedback_msg)
+
+        result = Recog.Result()
+
+        result.speech = ""
+
+
+        return result
+
+    def listener(self):
+        #self.get_logger().info('I heard: "%s"' % msg.data)
+        self.get_logger().info('Talk and I am Listening...')
+        self.recording = sd.rec(int(self.duration * self.freq), samplerate=self.freq, channels=2)
+        
+        sd.wait()
+        write("/home/beedo/colcon_ws/src/robocup/speech/recording0.wav", self.freq, self.recording)
+
+        model = whisper.load_model("base.en")
+        self.result = model.transcribe("/home/beedo/colcon_ws/src/robocup/speech/recording0.wav", fp16=False)
+        self.get_logger().info(self.result["text"].lower())
+        return self.result["text"].lower()
 
 def main(args=None):
     rclpy.init(args=args)
 
-    speech_whisper = Speech()
+    fibonacci_action_server = FibonacciActionServer()
 
-    rclpy.spin(speech_whisper)
-
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    speech_whisper.destroy_node()
-    rclpy.shutdown()
+    rclpy.spin(fibonacci_action_server)
 
 
 if __name__ == '__main__':
-    main() 
+    main()

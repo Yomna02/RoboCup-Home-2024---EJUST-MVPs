@@ -1,0 +1,109 @@
+import time
+import rclpy
+from rclpy.action import ActionClient
+from rclpy.node import Node
+
+from action_robocup.action import TTS, Recog
+
+LISTENING = 0
+SPEAKING = 1
+node = None
+
+class TTS_Action_CLient():
+    def __init__(self):
+        self._action_client = ActionClient(node, TTS, 'tts')
+        self.tts_feedback = SPEAKING
+
+    def speak(self, speech):
+        goal_msg = TTS.Goal()
+        goal_msg.speech = speech
+
+        self._action_client.wait_for_server()
+
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        node.get_logger().info('Speaking')
+
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        result = future.result().result
+        # node.get_logger().info(f'Finished {result.finished}')
+        # rclpy.shutdown()
+
+    def feedback_callback(self, feedback_msg):
+        self.tts_feedback = feedback_msg.feedback
+        node.get_logger().info('Received feedback: {0}'.format(self.tts_feedback.state))
+
+class Whisper_Action_CLient():
+    def __init__(self):
+        self._action_client = ActionClient(node, Recog, 'whisper')
+        self.speech = "none"
+        self.sr_feedback = SPEAKING
+
+    def listen(self):
+        goal_msg = Recog.Goal()
+        goal_msg.listen = True
+
+        self._action_client.wait_for_server()
+
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def not_listen(self):
+        goal_msg = Recog.Goal()
+        goal_msg.listen = False
+
+        self._action_client.wait_for_server()
+
+        self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        node.get_logger().info('Listening')
+        
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        self.result = future.result().result
+        node.get_logger().info(f'I heard {self.result.speech}')
+        self.speech = self.result.speech
+        # rclpy.shutdown()
+
+    def feedback_callback(self, feedback_msg):
+        self.sr_feedback = feedback_msg.feedback
+        node.get_logger().info('Received feedback: {0}'.format(self.sr_feedback.state))
+
+def main(args=None):
+    global node
+
+    rclpy.init(args=args)
+    
+    node = rclpy.create_node("curry_luggage")
+
+    tts = TTS_Action_CLient()
+    sr = Whisper_Action_CLient()
+    
+    sr.not_listen()
+    tts.speak("Hi Master, How can I help you?")
+    
+    sr.listen()
+    # if sr.sr_feedback == SPEAKING:
+        # speech = sr.speech
+    # tts.speak(speech)
+
+    rclpy.spin(node)
+    
+
+
+if __name__ == '__main__':
+    main()
